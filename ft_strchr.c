@@ -6,7 +6,7 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 14:22:37 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/10 14:54:58 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:44:51 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-
-	i = 0;
 	if (s == NULL)
 		return (NULL);
-	while (s[i] != '\0')
+	while (*s != '\0')
 	{
-		if (s[i] == c)
-			return ((char *)(s + i));
-		i++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
+	if (*s == (char)c)
+		return ((char *)s);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 22:50:03 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/18 00:04:26 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:03:55 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,39 @@ static int	num_len(int n)
 	return (len);
 }
 
+static void	ft_putnbr_stock(long n, char *str, int *i)
+{
+	if (n > 9)
+	{
+		ft_putnbr_stock(n / 10, str, i);
+		ft_putnbr_stock(n % 10, str, i);
+	}
+	else
+	{
+		str[*i] = n + '0';
+		(*i)++;
+	}
+}
+
 char	*ft_itoa(int n)
 {
-	int		len;
-	char	*num_str;
+	char	*str;
+	int		i;
+	long	nbr;
 
-	len = num_len(n);
-	num_str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!num_str)
+	nbr = n;
+	str = malloc(sizeof(char) * (num_len(nbr) + 1));
+	if (!str)
 		return (NULL);
-	num_str[len] = '\0';
-	if (n < 0)
+	i = 0;
+	if (nbr < 0)
 	{
-		num_str[0] = '-';
-		n = -n;
+		str[i++] = '-';
+		nbr *= -1;
 	}
-	while (len > 0 && num_str[len - 1] != '-')
-	{
-		num_str[len - 1] = (n % 10) + '0';
-		n /= 10;
-		len--;
-	}
-	return (num_str);
+	ft_putnbr_stock(nbr, str, &i);
+	str[i] = '\0';
+	return (str);
 }
 /*
 #include <stdio.h>

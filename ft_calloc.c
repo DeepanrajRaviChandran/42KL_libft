@@ -6,7 +6,7 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 18:38:26 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/15 21:17:02 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:19:56 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	char			*ptr;
-	unsigned int	i;
-	unsigned int	total;
+	char	*ptr;
+	size_t	i;
+	size_t	total;
 
+	if (count > 0 && size > 0 && SIZE_MAX / count < size)
+		return (NULL);
 	total = count * size;
 	ptr = malloc(total);
 	if (!ptr)

@@ -6,7 +6,7 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 19:27:40 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/16 20:11:04 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:55:14 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	unsigned int	size;
 	char			*fin_str;
 
+	if (!s1 || !s2)
+		return (NULL);
 	size = ft_strlen(s1) + ft_strlen(s2);
 	fin_str = (char *)malloc(sizeof(char) * (size + 1));
 	if (!fin_str)

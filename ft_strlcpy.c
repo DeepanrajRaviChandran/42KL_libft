@@ -6,7 +6,7 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 20:30:15 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/10 12:26:33 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:19:02 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
 	size_t	i;
+	size_t	results;
 
 	if (dest == NULL || src == NULL)
 		return (0);
+	results = 0;
+	while (src[results])
+		results++;
+	if (size < 1)
+		return (results);
 	i = 0;
 	while (i < size - 1 && src[i] != '\0')
 	{
@@ -25,11 +31,7 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 		i++;
 	}
 	dest[i] = '\0';
-	while (src[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	return (results);
 }
 /*
 #include <stdio.h>

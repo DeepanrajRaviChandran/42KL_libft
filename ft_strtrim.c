@@ -6,7 +6,7 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:03:23 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/17 14:43:08 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:56:39 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	unsigned int	end;
 	unsigned int	i;
 
+	if (!s1 || !set)
+		return (NULL);
 	start = 0;
 	while (s1[start] && char_in_set(s1[start], set))
 		start++;

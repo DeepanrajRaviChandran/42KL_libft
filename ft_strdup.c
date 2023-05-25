@@ -6,7 +6,7 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:37:35 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/16 13:56:23 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:51:59 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*ft_strdup(const char *s)
 	while (s[len_s])
 		len_s++;
 	dst = (char *)malloc(sizeof(char) * (len_s + 1));
+	if (!dst)
+		return (NULL);
 	i = 0;
 	while (i < len_s)
 	{

@@ -6,7 +6,7 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 11:20:15 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/23 00:04:33 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:17:42 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,7 @@ int	ft_atoi(const char *str)
 	{
 		nb = (nb * 10) + (str[i++] - '0');
 	}
-	if (nb * s > INT_MAX)
-		return (INT_MAX);
-	else if (nb * s < INT_MIN)
-		return (INT_MIN);
-	else
-		return (nb * s);
+	return (nb * s);
 }
 /*
 #include <stdio.h>

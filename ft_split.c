@@ -6,135 +6,108 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:40:44 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/19 15:53:35 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:16:47 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_substring(char const *str, char delimiter)
+int	count_substring(char const *s, char delimiter)
 {
-	int	word;
-	int	is_word;
+	int	i;
+	int	substring;
+	int	chars;
 
-	while (*str)
+	substring = 0;
+	chars = 0;
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (*str == delimiter)
-			is_word = 0;
-		else if (is_word == 0)
+		if (s[i] != delimiter)
+			chars++;
+		else
 		{
-			is_word = 1;
-			word++;
+			if (chars > 0)
+				substring++;
+			chars = 0;
 		}
-		str++;
+		i++;
 	}
-	return (word);
+	if (chars > 0)
+		substring++;
+	return (substring);
 }
 
-static int	free_string(char **str, int i)
+static int	free_mem(char **str, int x)
 {
-	while (--i >= 0)
-		free(str[i]);
+	while (--x >= 0)
+		free(str[x]);
 	free(str);
 	return (0);
 }
 
-static int	str_mem_alloc(char **str, int i, int cha)
+static int	set_mem_alloc(char **str, int x, int chars)
 {
-	str[i] = malloc(sizeof(char) * (cha + 1));
-	if (!str[i])
-		return (free_string(str, i));
+	str[x] = malloc((chars + 1) * sizeof(char));
+	if (str[x] == NULL)
+		return (free_mem(str, x));
 	return (1);
 }
 
-static char	**initmem(char const *s, char c)
+static char	**initialize_mem(char const *s, char delimiter)
 {
-	int		cha;
-	int		i;
+	int		chars;
+	int		x;
 	char	**str;
 
-	str = ft_calloc((count_substring(s, c) + 1), sizeof(char *));
-	if (!str)
-		return (NULL);
-	cha = 0;
-	i = 0;
-	while (*s)
+	str = ft_calloc((count_substring(s, delimiter) + 1), sizeof(char *));
+	if (str == NULL)
+		return (str);
+	chars = 0;
+	x = 0;
+	while (*s != '\0')
 	{
-		if (*s++ != c)
-			cha++;
+		if (*s++ != delimiter)
+			chars++;
 		else
 		{
-			if (cha > 0)
-				if (!str_mem_alloc(str, i++, cha))
+			if (chars > 0)
+				if (!set_mem_alloc(str, x++, chars))
 					return (NULL);
-			cha = 0;
+			chars = 0;
 		}
 	}
-	if (cha > 0)
-		if (!str_mem_alloc(str, i++, cha))
+	if (chars > 0)
+		if (!set_mem_alloc(str, x++, chars))
 			return (NULL);
 	return (str);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char delimiter)
 {
-	char	**res;
+	char	**str;
 	int		i;
-	int		j;
-	int		start;
+	int		x;
+	int		cpy_start;
 
-	if (!s || s[0] == '\0')
+	if (s == NULL || s[0] == '\0')
 		return (ft_calloc(1, sizeof(char *)));
-	res = initmem(s, c);
-	if (!res)
+	str = initialize_mem(s, delimiter);
+	if (str == NULL)
 		return (NULL);
 	i = -1;
-	j = 0;
-	start = 0;
-	while (s[++i])
+	x = 0;
+	cpy_start = 0;
+	while (s[++i] != '\0')
 	{
-		if (s[i] == c)
+		if (s[i] == delimiter)
 		{
-			if ((i - start) > 0)
-				ft_strlcpy(res[j++], &s[start], (i - start) + 1);
-			start = i + 1;
+			if ((i - cpy_start) > 0)
+				ft_strlcpy(str[x++], &s[cpy_start], (i - cpy_start) + 1);
+			cpy_start = i + 1;
 		}
 	}
-	if ((i - start) > 0)
-		ft_strlcpy(res[j], &s[start], (i - start) + 1);
-	return (res);
+	if ((i - cpy_start) > 0)
+		ft_strlcpy(str[x], &s[cpy_start], (i - cpy_start) + 1);
+	return (str);
 }
-/*
-#include <stdio.h>
-
-int main(void)
-{
-    char const *s = "Hello    world  this  is a test";
-    char c = ' ';
-
-    // Call ft_split and store the result
-    char **result = ft_split(s, c);
-
-    // Check if ft_split succeeded (result is not NULL)
-    if (result == NULL)
-    {
-        printf("ft_split failed to allocate memory.\n");
-        return 1; // Return an error code
-    }
-
-    // Print the resulting array of strings
-    for (int i = 0; result[i] != NULL; i++)
-    {
-        printf("%s\n", result[i]);
-    }
-
-    // Free the memory allocated by ft_split
-    for (int i = 0; result[i] != NULL; i++)
-    {
-        free(result[i]);
-    }
-    free(result);
-
-    return 0; // Return success
-}
-*/

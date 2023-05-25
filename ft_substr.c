@@ -6,33 +6,52 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:36:38 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/16 16:20:56 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:21:04 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*extract_substring(const char *s, unsigned int start, size_t len)
 {
-	char				*substr;
-	unsigned int		i;
-	unsigned int		j;
+	char	*substring;
+	size_t	i;
 
-	substr = (char *)malloc(sizeof(char) * (len + 1));
-	if (!substr)
+	substring = (char *)malloc(sizeof(char) * (len + 1));
+	if (!substring)
 		return (NULL);
 	i = 0;
-	j = 0;
-	while (s[i] && i < start)
-		i++;
-	while (s[i] && j < len)
+	while (i < len)
 	{
-		substr[j] = s[i];
-		j++;
+		substring[i] = s[start + i];
 		i++;
 	}
-	substr[j] = '\0';
-	return (substr);
+	substring[i] = '\0';
+	return (substring);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*dest;
+	size_t	s_len;
+
+	if (!s)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (s_len < start)
+	{
+		dest = (char *)malloc(sizeof(char));
+		if (!dest)
+			return (NULL);
+		dest[0] = '\0';
+		return (dest);
+	}
+	else
+	{
+		if (start + len > s_len)
+			len = s_len - start;
+		return (extract_substring(s, start, len));
+	}
 }
 /*
 #include <stdio.h>
