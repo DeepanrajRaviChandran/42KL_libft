@@ -6,7 +6,7 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 21:47:23 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/24 22:12:17 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:21:14 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	t_list	*current;
 	t_list	*next;
 
+	if (!lst || !del)
+		return ;
 	if (lst)
 	{
 		current = *lst;

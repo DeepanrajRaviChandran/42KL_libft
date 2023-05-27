@@ -6,7 +6,7 @@
 /*   By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:57:05 by dravi-ch          #+#    #+#             */
-/*   Updated: 2023/05/24 22:14:12 by dravi-ch         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:23:59 by dravi-ch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
+	if (!lst || !del)
+		return ;
 	if (lst)
 	{
 		if (del)
