@@ -6,7 +6,7 @@
 #    By: dravi-ch <dravi-ch@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 00:23:00 by dravi-ch          #+#    #+#              #
-#    Updated: 2023/05/27 16:47:38 by dravi-ch         ###   ########.fr        #
+#    Updated: 2023/05/27 18:46:04 by dravi-ch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,9 +44,7 @@ fclean	:	clean
 
 re		:	fclean all
 
-bonus	:	$(BONUS_OBJECTS)
+bonus	:	$(BONUS_OBJECTS) $(NAME)
 			ar rcs $(NAME) $(BONUS_OBJECTS)
 
 .PHONY	:	all clean fclean re bonus
-
-
